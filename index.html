@@ -42,41 +42,25 @@
         ul {
             line-height: 1.8;
         }
-        .price-grid {
+        .price-grid, .reviews-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
             margin-top: 1rem;
         }
-        .price-card {
+        .price-card, .review-card {
             background-color: #0f172a;
             border: 1px solid #334155;
             border-radius: 8px;
             padding: 1.2rem;
-            text-align: center;
         }
-        .price-card h3 {
-            color: #38bdf8;
-            margin-top: 0;
-        }
-        .price-tag {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #4ade80;
-            margin: 0.5rem 0;
-        }
-        .contact {
-            text-align: center;
-            background-color: #0284c7;
-            color: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-        }
-        .contact a {
-            color: #ffffff;
-            font-weight: bold;
-            text-decoration: underline;
-        }
+        .price-card { text-align: center; }
+        .price-card h3 { color: #38bdf8; margin-top: 0; }
+        .price-tag { font-size: 1.5rem; font-weight: bold; color: #4ade80; margin: 0.5rem 0; }
+        .stars { color: #facc15; font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .reviewer { font-weight: bold; color: #38bdf8; margin-top: 0.5rem; text-align: right; }
+        .contact { text-align: center; background-color: #0284c7; color: white; padding: 1.5rem; border-radius: 10px; }
+        .contact a { color: #ffffff; font-weight: bold; text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -109,6 +93,22 @@
         </div>
 
         <div class="card">
+            <h2>Klientų Atsiliepimai</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Puikiai surinktas kompiuteris, viskas veikia labai greitai. Rekomenduoju!"</p>
+                    <div class="reviewer">- Mantas</div>
+                </div>
+                <div class="review-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Auris padėjo išsirinkti geriausias detales už mano biudžetą. Labai ačiū!"</p>
+                    <div class="reviewer">- Tomas</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
             <h2>Mūsų Paslaugos</h2>
             <ul>
                 <li>Individualių kompiuterių surinkimas pagal jūsų biudžetą ir poreikius</li>
@@ -119,8 +119,8 @@
         </div>
 
         <div class="card contact">
-            <h2>Kaip Užsisakyti?</h2>
-            <p>Jei norite, kad surenkčiau jums kompiuterį arba norite įsigyti esamą modelį, susisiekite su manimi el. paštu:</p>
+            <h2>Kaip Užsisakyti ar Palikti Atsiliepimą?</h2>
+            <p>Norite įsigyti kompiuterį arba jau esate pirkėjas ir norite pasidalinti atsiliepimu? Rašykite el. paštu:</p>
             <p style="font-size: 1.3rem;"><a href="mailto:Voverisauris@gmail.com">Voverisauris@gmail.com</a></p>
         </div>
     </div>
