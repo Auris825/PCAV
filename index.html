@@ -3,127 +3,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PCAV - Kompiuterių Surinkimas</title>
+    <title>PCAV | Modernūs Kompiuteriai ir Surinkimas</title>
+    <!-- Modernus šriftas iš Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --bg-color: #090d16;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.3);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --green: #4ade80;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-color: #0f172a;
-            color: #f8fafc;
         }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Pagrindinis foninis spvis */
+        .background-glow {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
         header {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            padding: 2rem;
             text-align: center;
-            border-bottom: 3px solid #38bdf8;
+            padding: 4rem 1rem 2rem;
         }
-        h1 {
-            color: #38bdf8;
-            margin: 0;
-            font-size: 2.5rem;
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px var(--accent-glow);
         }
+
+        header p {
+            color: var(--text-sub);
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
         .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
         }
+
         .card {
-            background-color: #1e293b;
-            padding: 1.5rem;
-            border-radius: 10px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
             margin-bottom: 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
+
+        .card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
         h2 {
-            color: #38bdf8;
-            margin-top: 0;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        ul {
-            line-height: 1.8;
+
+        /* Kainų kortelės */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
-        .price-grid, .reviews-grid {
+
+        .price-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-card p {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-tag {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--green);
+        }
+
+        /* Atsiliepimų sekcija */
+        .reviews-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
-        .price-card, .review-card {
-            background-color: #0f172a;
-            border: 1px solid #334155;
+
+        .review-card {
+            background: rgba(15, 23, 42, 0.6);
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
             border-radius: 8px;
-            padding: 1.2rem;
         }
-        .price-card { text-align: center; }
-        .price-card h3 { color: #38bdf8; margin-top: 0; }
-        .price-tag { font-size: 1.5rem; font-weight: bold; color: #4ade80; margin: 0.5rem 0; }
-        .stars { color: #facc15; font-size: 1.2rem; margin-bottom: 0.5rem; }
-        .reviewer { font-weight: bold; color: #38bdf8; margin-top: 0.5rem; text-align: right; }
-        .contact { text-align: center; background-color: #0284c7; color: white; padding: 1.5rem; border-radius: 10px; }
-        .contact a { color: #ffffff; font-weight: bold; text-decoration: underline; }
+
+        .review-card p {
+            font-style: italic;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .reviewer {
+            margin-top: 0.5rem;
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-align: right;
+        }
+
+        .no-reviews {
+            text-align: center;
+            color: var(--text-sub);
+            padding: 2rem 0;
+        }
+
+        /* Paslaugų sąrašas */
+        .services-list {
+            list-style: none;
+        }
+
+        .services-list li {
+            position: relative;
+            padding-left: 1.8rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-main);
+        }
+
+        .services-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--green);
+            font-weight: bold;
+        }
+
+        /* Mygtukai ir Kontaktai */
+        .contact-box {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(129, 140, 248, 0.1));
+            border: 1px solid var(--accent);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: #000;
+            font-weight: 700;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 1rem;
+            box-shadow: 0 0 20px var(--accent-glow);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background-color: #7dd3fc;
+        }
+
+        .btn-sub {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            box-shadow: none;
+            margin-top: 0.5rem;
+        }
+
+        .btn-sub:hover {
+            background: rgba(56, 189, 248, 0.1);
+        }
     </style>
 </head>
 <body>
 
+    <div class="background-glow"></div>
+
     <header>
-        <h1>PCAV</h1>
-        <p>Aurio surinkti ir sukomplektuoti kompiuteriai</p>
+        <div class="logo">PCAV</div>
+        <p>Profesionalus kompiuterių surinkimas ir komplektavimas pagal Aurį</p>
     </header>
 
     <div class="container">
+
+        <!-- Apie mus -->
         <div class="card">
-            <h2>Apie Mus</h2>
-            <p>Sveiki atvykę į PCAV! Čia rasite profesionaliai surinktus, patikrintus ir paruoštus naudojimui kompiuterius žaidimams, darbui ar mokslams.</p>
+            <h2>💻 Kodėl verta rinktis PCAV?</h2>
+            <p>Ieškai patikimo kompiuterio žaidimams, darbui ar mokslams? Sukomplektuosiu, surinksiu ir paruošiu kompiuterį naudojimui be jokių rūpesčių. Kiekvienas kompiuteris renkamas kruopščiai, sutvarkant laidus (Cable Management) ir atliekant streso testus.</p>
         </div>
 
+        <!-- Pavyzdžiai / Kainos -->
         <div class="card">
-            <h2>Kompiuterių Pavyzdžiai ir Kainos</h2>
-            <div class="price-grid">
+            <h2>⚡ Surinkimo Pavyzdžiai ir Kainos</h2>
+            <div class="grid">
                 <div class="price-card">
-                    <h3>Biudžetinis / Pradinis PC</h3>
-                    <p>Puikiai tinka darbui, mokslams bei lengvesniems žaidimams.</p>
+                    <div>
+                        <h3>🎮 Biudžetinis / Pradinis PC</h3>
+                        <p>Puikus pasirinkimas populiariems žaidimams (CS2, GTA V, Roblox, Fortnite) bei kasdieniam darbui.</p>
+                    </div>
                     <div class="price-tag">Nuo 450 €</div>
                 </div>
                 <div class="price-card">
-                    <h3>Galingas Žaidimų PC</h3>
-                    <p>Skirtas naujausiems žaidimams aukštais grafikos nustatymais ir greitam darbui.</p>
+                    <div>
+                        <h3>🚀 Ultra Žaidimų PC</h3>
+                        <p>Aukščiausia sparta naujausiems žaidimams ultra grafikoje, transliacijoms (Stream) ir vaizdo montavimui.</p>
+                    </div>
                     <div class="price-tag">Nuo 850 €</div>
                 </div>
             </div>
         </div>
 
+        <!-- Atsiliepimai -->
         <div class="card">
-            <h2>Klientų Atsiliepimai</h2>
-            <div class="reviews-grid">
-                
-                <!-- Čia bus tavo įkeliami atsiliepimai. Kai gausi pirmą atsiliepimą, parašyk man arba įterpk šį kodo gabaliuką:
+            <h2>💬 Klientų Atsiliepimai</h2>
+            
+            <div class="reviews-container">
+                <!-- ČIA ATEITYJE ATSIRAS ATSILIEPIMAI -->
+                <!-- Pavyzdys kaip atrodys:
                 <div class="review-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"Kliento tekstas..."</p>
-                    <div class="reviewer">- Kliento vardas</div>
-                </div>
+                    <p>"Puikus kompiuteris, viskas veikia sklandžiai!"</p>
+                    <div class="reviewer">⭐⭐⭐⭐⭐ - Jonas</div>
+                </div> 
                 -->
+            </div>
 
-                <p style="text-align: center; color: #94a3b8;">Atsiliepimų kol kas nėra. Būkite pirmasis!</p>
-
+            <div class="no-reviews">
+                <p>Atsiliepimų kol kas nėra. Būkite pirmasis!</p>
+                <a href="mailto:Voverisauris@gmail.com?subject=Atsiliepimas%20PCAV" class="btn btn-sub">Palikti atsiliepimą</a>
             </div>
         </div>
 
+        <!-- Paslaugos -->
         <div class="card">
-            <h2>Mūsų Paslaugos</h2>
-            <ul>
-                <li>Individualių kompiuterių surinkimas pagal jūsų biudžetą ir poreikius</li>
-                <li>Kompiuterių atnaujinimas (Upgrade)</li>
-                <li>Gedimų diagnostika ir valymas nuo dulkių</li>
-                <li>Termopastos keitimas</li>
+            <h2>🛠️ Teikiamos Paslaugos</h2>
+            <ul class="services-list">
+                <li>Individualus kompiuterių rinkimas pagal turimą biudžetą</li>
+                <li>Seno kompiuterio atnaujinimas (Upgrade)</li>
+                <li>Dulkių valymas ir termopastos keitimas</li>
+                <li>Windows ir tvarkyklių (Drivers) įrašymas</li>
             </ul>
         </div>
 
-        <div class="card contact">
-            <h2>Kaip Užsisakyti?</h2>
-            <p>Jei norite, kad surenkčiau jums kompiuterį arba norite įsigyti esamą modelį, susisiekite su manimi el. paštu:</p>
-            <p style="font-size: 1.3rem;"><a href="mailto:Voverisauris@gmail.com">Voverisauris@gmail.com</a></p>
+        <!-- Kontaktai -->
+        <div class="card contact-box">
+            <h2>📩 Norite užsisakyti ar pasikonsultuoti?</h2>
+            <p>Parašykite man ir padėsiu išsirinkti geriausią variantą!</p>
+            <a href="mailto:Voverisauris@gmail.com" class="btn">Susisiekti per El. Paštą</a>
         </div>
+
     </div>
 
 </body>
